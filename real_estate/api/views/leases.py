@@ -3,7 +3,7 @@ from time import sleep
 from rest_framework import generics, status
 from rest_framework.response import Response
 
-from real_estate.api.serializers import LeaseSerializer
+from real_estate.api.serializers.lease import LeaseSerializer
 from real_estate.models import Lease, RealEstateObject
 
 
