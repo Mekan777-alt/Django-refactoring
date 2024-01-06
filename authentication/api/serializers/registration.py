@@ -3,6 +3,7 @@ from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
 from authentication.models import User
+from authentication.enums import Groups
 
 
 class RegistrationSerializer(serializers.Serializer):
@@ -33,7 +34,7 @@ class RegistrationSerializer(serializers.Serializer):
         return super().validate(attrs)
 
     def create(self, validated_data):
-        name = 'TENANT' if validated_data.get('tenant') else 'LANDLORD'
+        name = Groups.TENANT.name if validated_data.get('tenant') else Groups.LANDLORD.name
 
         group = Group.objects.get(name=name)
 
@@ -41,8 +42,9 @@ class RegistrationSerializer(serializers.Serializer):
             first_name=validated_data.get('first_name'),
             last_name=validated_data.get('last_name'),
             email=validated_data.get('email'),
-            password=validated_data.get('password')
         )
+        user.set_password(validated_data.get('password'))
+        user.save()
 
         user.groups.add(group)
 
