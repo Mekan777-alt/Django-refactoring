@@ -24,7 +24,7 @@ load_dotenv()
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&wfi-lh407r7$ei(c$pnzt-z#o+95fq1j-cfg(73bfm@@ewfns'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'drf_spectacular',
 
     'authentication.apps.AuthenticationConfig',
     'real_estate.apps.RealEstateConfig'
@@ -92,7 +93,6 @@ DATABASES = {
         "PORT": os.getenv("POSTGRES_PORT"),
     },
 }
-
 
 
 # Password validation

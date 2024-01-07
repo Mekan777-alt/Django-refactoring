@@ -1,9 +1,9 @@
 from django.db import models
 
 
-#объект недвижимости
+# объект недвижимости
 class RealEstateObject(models.Model):
-    cadastral_number = models.CharField("Кадастровый номер", max_length=255)
+    cadastral_number = models.CharField(max_length=255)
 
     address = models.CharField(max_length=255)
 
