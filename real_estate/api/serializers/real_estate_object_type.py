@@ -1,12 +1,12 @@
 from rest_framework import serializers
+from real_estate.models import RealEstateObjectType
 
 
 class RealEstateObjectTypeSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
-    name = serializers.CharField()
+    name = serializers.CharField(max_length=150)
 
     def create(self, validated_data):
-        return RealEstateObjectTypeSerializer(**validated_data)
+        return RealEstateObjectType.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)

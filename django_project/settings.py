@@ -156,5 +156,11 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=30)
 }
 
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Тестовое API',
+    'DESCRIPTION': 'Описание нашего API',
+    'VERSION': '1.0.0',
+}
+
 CELERY_BROKER_URL = os.environ.get('REDIS_HOST')
 CELERY_RESULT_BACKEND = os.environ.get('REDIS_HOST')
