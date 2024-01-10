@@ -12,7 +12,6 @@ class LeaseAPIView(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = Lease.objects.all()
     serializer_class = LeaseSerializer
-    pagination_class = PageNumberPagination
 
     def create(self, request, *args, **kwargs):
         r = RealEstateObject.objects.filter(pk=kwargs['pk']).first()
