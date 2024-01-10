@@ -9,6 +9,8 @@ class RealEstateObject(models.Model):
 
     description = models.TextField()
 
+    price = models.DecimalField(max_digits=19, decimal_places=2)
+
     owner = models.ForeignKey(
         'authentication.User',
         on_delete=models.CASCADE
