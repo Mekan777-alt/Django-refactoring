@@ -1,4 +1,3 @@
-from time import sleep
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -6,11 +5,7 @@ from real_estate.api.serializers.lease import LeaseSerializer
 from real_estate.models import Lease
 from rest_framework.pagination import PageNumberPagination
 from real_estate.models import RealEstateObject
-
-
-def generate_rental_agr(lease):
-    # Какая-то очень долгая логика по генерации документа
-    sleep(20)
+from real_estate.tasks import generate_rental_agr
 
 
 class LeaseAPIView(viewsets.ModelViewSet):
