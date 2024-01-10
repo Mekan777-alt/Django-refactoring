@@ -1,5 +1,5 @@
 from time import sleep
-from rest_framework import generics, status
+from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from real_estate.api.serializers.lease import LeaseSerializer
@@ -13,7 +13,7 @@ def generate_rental_agr(lease):
     sleep(20)
 
 
-class LeaseAPIView(generics.ListCreateAPIView):
+class LeaseAPIView(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = Lease.objects.all()
     serializer_class = LeaseSerializer
@@ -28,15 +28,3 @@ class LeaseAPIView(generics.ListCreateAPIView):
         generate_rental_agr(lease)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-    def list(self, request, *args, **kwargs):
-        queryset = self.filter_queryset(self.get_queryset())
-
-        page = self.paginate_queryset(queryset)
-
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            return Response(self.get_paginated_response(serializer.data))
-
-        serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
